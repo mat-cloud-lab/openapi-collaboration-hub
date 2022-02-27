@@ -14,15 +14,17 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '6.x'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: true
-    
+    configuration: 'Release'
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Default(5b561054-bfea-47ab-b596-35495e57e0d5)'
     appType: 'webApp'
     WebAppName: 'open-api-hub'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/publish'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/OpenHubCollaborationHub/OpenHubCollaborationHub/bin/Release/net6.0/publish/'
