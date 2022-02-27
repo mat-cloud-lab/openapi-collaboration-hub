@@ -19,7 +19,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    configuration: 'Release'
+    arguments: '--configuration Release'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -27,4 +27,3 @@ steps:
     azureSubscription: 'Default(5b561054-bfea-47ab-b596-35495e57e0d5)'
     appType: 'webApp'
     WebAppName: 'open-api-hub'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/OpenHubCollaborationHub/OpenHubCollaborationHub/bin/Debug/net6.0/publish/'
