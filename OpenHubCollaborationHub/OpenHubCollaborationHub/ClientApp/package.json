@@ -3,14 +3,49 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+
+    "ajv": "^6.12.3",
+    "ajv-errors": "^1.0.1",
+    "ajv-keywords": "^3.5.2",
     "bootstrap": "^5.1.0",
+    "boron": "^0.2.3",
+    "brace": "^0.11.1",
+    "classnames": "^2.2.6",
+    "deepmerge": "^4.0.0",
+    "file-dialog": "0.0.8",
     "http-proxy-middleware": "^0.19.1",
+    "immutable": "^3.x.x",
+    "is-json": "^2.0.1",
+    "js-yaml": "=4.1.0",
+    "json-beautify": "^1.0.1",
+    "json-refs": "^3.0.4",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.21",
     "merge": "^2.1.1",
+    "promise-worker": "^2.0.1",
+    "prop-types": "15.8.1",
+    "querystring-browser": "^1.0.4",
     "oidc-client": "^1.11.5",
     "react": "^17.0.2",
+    "react-ace": "^10.0.0",
+    "react-dd-menu": "^2.0.0",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^12.0.4",
+    "react-file-download": "^0.3.2",
+    "react-immutable-proptypes": "^2.1.0",
+    "react-redux": "^7.2.8",
     "react-router-bootstrap": "^0.25.0",
+    "react-split-pane": "^2.0.3",
+    "react-transition-group": "^4.0.0",
+    "redux": "^4.2.0",
+    "reselect": "^4.0.0",
+    "swagger-client": "^3.18.5",
+    "swagger-ui-react": "^4.13.2",
+    "swagger-ui": "^4.13.2",
+    "traverse": "^0.6.6",
+    "validator": "=13.7.0",
+    "yaml-js": "^0.3.1",
+
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "reactstrap": "^8.9.0",
@@ -42,8 +77,8 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "start": "rimraf ./build && react-scripts start",
-    "build": "react-scripts build",
+    "start": "rimraf ./build && react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/"
@@ -51,18 +86,22 @@
   "eslintConfig": {
     "extends": [
       "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "rules": {
+      "no-restricted-globals": "off",
+      "no-useless-escape": "off",
+      "import/no-anonymous-default-export": "off",
+      "no-template-curly-in-string": "off",
+      "eqeqeq": "off",
+      "no-mixed-operators": "off",
+      "jsx-a11y/alt-text": "off",
+      "no-unused-vars": "off",
+      "react-hooks/exhaustive-deps": "off"
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }

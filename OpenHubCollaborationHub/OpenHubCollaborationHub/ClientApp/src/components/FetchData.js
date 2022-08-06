@@ -1,4 +1,24 @@
 import React, { Component } from 'react';
+import SwaggerUI from "swagger-ui-react"
+import "swagger-ui-react/swagger-ui.css"
+import { Container, Col } from "reactstrap";
+
+import EditorPlugin from "../plugins/editor"
+import LocalStoragePlugin from "../plugins/local-storage"
+import ValidateBasePlugin from "../plugins/validate-base"
+import ValidateSemanticPlugin from "../plugins/validate-semantic"
+import ValidateJsonSchemaPlugin from "../plugins/json-schema-validator"
+import EditorAutosuggestPlugin from "../plugins/editor-autosuggest"
+import EditorAutosuggestSnippetsPlugin from "../plugins/editor-autosuggest-snippets"
+import EditorAutosuggestKeywordsPlugin from "../plugins/editor-autosuggest-keywords"
+import EditorAutosuggestOAS3KeywordsPlugin from "../plugins/editor-autosuggest-oas3-keywords"
+import EditorAutosuggestRefsPlugin from "../plugins/editor-autosuggest-refs"
+import PerformancePlugin from "../plugins/performance"
+import JumpToPathPlugin from "../plugins/jump-to-path"
+import SplitPaneModePlugin from "../plugins/split-pane-mode"
+import ASTPlugin from "../plugins/ast"
+import EditorLayout from "../layout"
+
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -9,45 +29,42 @@ export class FetchData extends Component {
   }
 
   componentDidMount() {
-    this.populateWeatherData();
-  }
-
-  static renderForecastsTable(forecasts) {
-    return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-          </tr>
-        </thead>
-        <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    );
+    //this.populateWeatherData();
   }
 
   render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+    const plugins = [
+      EditorPlugin,
+      //ValidateBasePlugin,
+      //ValidateSemanticPlugin,
+      //ValidateJsonSchemaPlugin,
+      LocalStoragePlugin,
+      EditorAutosuggestPlugin,
+      EditorAutosuggestSnippetsPlugin,
+      EditorAutosuggestKeywordsPlugin,
+      EditorAutosuggestRefsPlugin,
+      EditorAutosuggestOAS3KeywordsPlugin,
+      PerformancePlugin,
+      //JumpToPathPlugin,
+      SplitPaneModePlugin,
+      ASTPlugin,
+      () => ({ components: { EditorLayout } }),
+      SwaggerUI.plugins.SafeRender({
+          fullOverride: true,
+          componentList: [
+            "EditorLayout",
+            "EditorContainer"
+          ]
+        }
+      )
+    ]
 
     return (
-      <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
+      <SwaggerUI
+        url="https://petstore.swagger.io/v2/swagger.yaml"
+        plugins={plugins}
+        layout="EditorLayout"
+      />
     );
   }
 
